@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import QRCode from 'qrcode.react';
+import { useSetRecoilState } from 'recoil';
+import { userState } from '@recoil/user';
 import {
     Box,
     Button,
@@ -20,7 +22,8 @@ function makeQRURL(requestKey) {
 
 const intialRemainingTime = 120;
 
-export default function KlipLoginDialog({ open, onClose, setAddress }) {
+export default function KlipLoginDialog({ open, onClose }) {
+    const setUser = useSetRecoilState(userState);
     const [requestKey, setRequestKey] = useState('');
     const [remaining, setRemaining] = useState(0);
 
@@ -40,14 +43,9 @@ export default function KlipLoginDialog({ open, onClose, setAddress }) {
 
                 const address = await getResult(requestKey);
                 if (address) {
-                    setAddress(address);
+                    setUser({ address });
                     onClose();
                 }
-                // setUser(
-                //     produce(user, draft => {
-                //         draft.address = address;
-                //     }),
-                // );
             }
         },
         open && remaining > 0 ? 1000 : null,
@@ -110,5 +108,4 @@ export default function KlipLoginDialog({ open, onClose, setAddress }) {
 KlipLoginDialog.propTypes = {
     open: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
-    setAddress: PropTypes.func.isRequired,
 };
