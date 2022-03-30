@@ -6,7 +6,7 @@ import Home from '@routes/home/Home';
 
 export default function AppRoutes() {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
             <Routes>
                 <Route path="/" element={<Home />} />
             </Routes>
