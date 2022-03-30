@@ -20,6 +20,7 @@ module.exports = {
             { devDependencies: true },
         ],
         'no-unused-vars': 1,
+        'import/prefer-default-export': 'off',
     },
     settings: {
         'import/resolver': {
