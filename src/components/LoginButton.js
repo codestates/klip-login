@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Box, Button } from '@mui/material';
-import PropTypes from 'prop-types';
 import KlipLoginDialog from '@components/KlipLoginDialog';
 
-export default function LoginButton({ setAddress }) {
+export default function LoginButton() {
     const [klipOpen, setKlipOpen] = useState(false);
     function handleWalletOpen(wallet) {
         switch (wallet) {
@@ -35,14 +34,9 @@ export default function LoginButton({ setAddress }) {
             <KlipLoginDialog
                 open={klipOpen}
                 onClose={() => handleWalletClose('klip')}
-                setAddress={setAddress}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             />
         </Box>
     );
 }
-
-LoginButton.propTypes = {
-    setAddress: PropTypes.func.isRequired,
-};
